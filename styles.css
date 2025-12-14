@@ -463,6 +463,32 @@ body {
 }
 
 /* ================================
+   CONTACT LINK
+   ================================ */
+
+.contact-link {
+    position: fixed;
+    top: var(--spacing-md);
+    right: var(--spacing-md);
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    padding: 0.75rem 1.5rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-bg);
+    transition: var(--transition);
+    z-index: 100;
+    letter-spacing: 0.02em;
+}
+
+.contact-link:hover {
+    background: var(--color-text);
+    color: var(--color-bg);
+    border-color: var(--color-text);
+}
+
+/* ================================
    MINIMAL HERO & PORTFOLIO SELECTION
    ================================ */
 
@@ -661,6 +687,13 @@ body {
 
     .portfolio-card-title {
         font-size: clamp(1.5rem, 5vw, 2rem);
+    }
+
+    .contact-link {
+        top: var(--spacing-sm);
+        right: var(--spacing-sm);
+        padding: 0.6rem 1.2rem;
+        font-size: 0.875rem;
     }
 
     .page-header .container {

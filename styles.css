@@ -467,13 +467,23 @@ body {
    ================================ */
 
 .hero-minimal {
-    min-height: 70vh;
+    min-height: 50vh;
     padding-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.hero-minimal .hero-title {
+    margin-bottom: var(--spacing-sm);
+}
+
+.hero-minimal .hero-intro {
+    margin-bottom: 0;
 }
 
 .portfolio-selection {
-    padding: var(--spacing-xl) 0;
-    min-height: 30vh;
+    padding: var(--spacing-md) 0 var(--spacing-lg);
+    min-height: auto;
     display: flex;
     align-items: center;
 }
@@ -489,14 +499,14 @@ body {
 .portfolio-card {
     position: relative;
     display: block;
-    padding: var(--spacing-lg) var(--spacing-md);
+    padding: var(--spacing-md) var(--spacing-sm);
     background: var(--color-bg);
     border: 1px solid var(--color-border);
     text-decoration: none;
     color: var(--color-text);
     transition: var(--transition);
     overflow: hidden;
-    min-height: 280px;
+    min-height: 200px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -622,16 +632,35 @@ body {
     }
 
     .hero-minimal {
-        min-height: 60vh;
+        min-height: auto;
+        padding: var(--spacing-lg) 0 var(--spacing-sm);
+    }
+
+    .hero-minimal .hero-title {
+        margin-bottom: var(--spacing-xs);
+    }
+
+    .hero-minimal .intro-text {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .portfolio-selection {
+        padding: var(--spacing-sm) 0 var(--spacing-md);
     }
 
     .portfolio-grid {
         grid-template-columns: 1fr;
-        gap: 1.5rem;
+        gap: 1rem;
     }
 
     .portfolio-card {
-        min-height: 220px;
+        min-height: 160px;
+        padding: var(--spacing-sm) var(--spacing-xs);
+    }
+
+    .portfolio-card-title {
+        font-size: clamp(1.5rem, 5vw, 2rem);
     }
 
     .page-header .container {

@@ -466,10 +466,13 @@ body {
    CONTACT LINK
    ================================ */
 
+.contact-wrapper {
+    text-align: center;
+    margin-top: var(--spacing-md);
+}
+
 .contact-link {
-    position: fixed;
-    top: var(--spacing-md);
-    right: var(--spacing-md);
+    display: inline-block;
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--color-text);
@@ -478,7 +481,6 @@ body {
     border: 1px solid var(--color-border);
     background: var(--color-bg);
     transition: var(--transition);
-    z-index: 100;
     letter-spacing: 0.02em;
 }
 
@@ -689,9 +691,11 @@ body {
         font-size: clamp(1.5rem, 5vw, 2rem);
     }
 
+    .contact-wrapper {
+        margin-top: var(--spacing-sm);
+    }
+
     .contact-link {
-        top: var(--spacing-sm);
-        right: var(--spacing-sm);
         padding: 0.6rem 1.2rem;
         font-size: 0.875rem;
     }

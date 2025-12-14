@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Benita Kulabako</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Login Screen -->
+    <div id="loginScreen" class="login-screen">
+        <div class="login-container">
+            <h1>Admin Panel</h1>
+            <p class="subtitle">Portfolio Management</p>
+            <form id="loginForm" class="login-form">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter admin password" required>
+                </div>
+                <button type="submit" class="btn-primary">Login</button>
+                <p class="error-message" id="loginError"></p>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="admin-dashboard hidden">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <h1>Portfolio Manager</h1>
+                <div class="header-actions">
+                    <a href="index.html" target="_blank" class="btn-secondary">View Site</a>
+                    <button id="logoutBtn" class="btn-secondary">Logout</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Tabs -->
+        <nav class="admin-nav">
+            <button class="nav-tab active" data-tab="upload">Upload Media</button>
+            <button class="nav-tab" data-tab="manage">Manage Content</button>
+            <button class="nav-tab" data-tab="settings">Settings</button>
+        </nav>
+
+        <!-- Upload Tab -->
+        <div id="uploadTab" class="tab-content active">
+            <div class="container">
+                <h2>Upload New Media</h2>
+
+                <div class="upload-section">
+                    <div class="upload-area" id="dropZone">
+                        <div class="upload-icon">📁</div>
+                        <h3>Drag & Drop Images</h3>
+                        <p>or click to browse</p>
+                        <input type="file" id="fileInput" multiple accept="image/*" hidden>
+                    </div>
+
+                    <div class="upload-options">
+                        <div class="form-group">
+                            <label for="categorySelect">Assign to Category</label>
+                            <select id="categorySelect">
+                                <option value="">Select Category</option>
+                                <option value="fashion">Fashion</option>
+                                <option value="beauty">Beauty</option>
+                                <option value="skincare">Skincare</option>
+                                <option value="wellness">Wellness & Sport</option>
+                                <option value="home">Home Interior</option>
+                                <option value="gallery">Photo Gallery</option>
+                                <option value="acting">Acting Teaser</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="brandName">Brand Name</label>
+                            <input type="text" id="brandName" placeholder="e.g., Nike, Chanel">
+                        </div>
+
+                        <button id="uploadBtn" class="btn-primary" disabled>Upload to Cloudflare</button>
+                    </div>
+                </div>
+
+                <!-- Preview Area -->
+                <div id="previewArea" class="preview-area hidden">
+                    <h3>Selected Files</h3>
+                    <div id="previewGrid" class="preview-grid"></div>
+                </div>
+
+                <!-- Upload Progress -->
+                <div id="uploadProgress" class="upload-progress hidden">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progressFill"></div>
+                    </div>
+                    <p id="progressText">Uploading...</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Manage Tab -->
+        <div id="manageTab" class="tab-content">
+            <div class="container">
+                <h2>Manage Content</h2>
+
+                <div class="filter-bar">
+                    <select id="filterCategory" class="filter-select">
+                        <option value="fashion">Fashion (3 max)</option>
+                        <option value="beauty">Beauty (3 max)</option>
+                        <option value="skincare">Skincare (3 max)</option>
+                        <option value="wellness">Wellness & Sport (3 max)</option>
+                        <option value="home">Home Interior (3 max)</option>
+                        <option value="gallery">Photo Gallery</option>
+                        <option value="acting">Acting Teaser (1 max)</option>
+                    </select>
+                    <button id="publishBtn" class="btn-primary">Publish to Site</button>
+                </div>
+
+                <div class="category-info">
+                    <p id="categoryCount"></p>
+                    <p class="help-text">Drag and drop to reorder images. First 3 images will appear on the site.</p>
+                </div>
+
+                <div id="mediaGrid" class="media-grid sortable">
+                    <!-- Media items will be loaded here -->
+                    <div class="empty-state">
+                        <p>Select a category to manage its content.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Settings Tab -->
+        <div id="settingsTab" class="tab-content">
+            <div class="container">
+                <h2>Cloudflare Settings</h2>
+
+                <div class="settings-section">
+                    <h3>Cloudflare R2 Configuration</h3>
+                    <p class="help-text">Configure your Cloudflare R2 storage for media uploads</p>
+
+                    <div class="form-group">
+                        <label for="accountId">Account ID</label>
+                        <input type="text" id="accountId" placeholder="Your Cloudflare Account ID">
+                        <small>Find in Cloudflare Dashboard → R2</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="bucketName">R2 Bucket Name</label>
+                        <input type="text" id="bucketName" placeholder="portfolio-media">
+                        <small>Create a bucket in R2 Dashboard</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="apiToken">API Token</label>
+                        <input type="password" id="apiToken" placeholder="Your R2 API Token">
+                        <small>Create in Cloudflare Dashboard → API Tokens</small>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="publicUrl">Public URL (Optional)</label>
+                        <input type="text" id="publicUrl" placeholder="https://pub-xxx.r2.dev">
+                        <small>Your R2 public bucket URL</small>
+                    </div>
+
+                    <button id="saveSettingsBtn" class="btn-primary">Save Settings</button>
+                    <button id="testConnectionBtn" class="btn-secondary">Test Connection</button>
+
+                    <div id="settingsMessage" class="settings-message"></div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Change Admin Password</h3>
+                    <div class="form-group">
+                        <label for="newPassword">New Password</label>
+                        <input type="password" id="newPassword" placeholder="Enter new password">
+                    </div>
+                    <button id="changePasswordBtn" class="btn-secondary">Update Password</button>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Quick Setup Guide</h3>
+                    <div class="setup-guide">
+                        <h4>1. Create Cloudflare R2 Bucket</h4>
+                        <ol>
+                            <li>Go to <a href="https://dash.cloudflare.com" target="_blank">Cloudflare Dashboard</a></li>
+                            <li>Navigate to R2 Object Storage</li>
+                            <li>Click "Create Bucket"</li>
+                            <li>Name it (e.g., "portfolio-media")</li>
+                        </ol>
+
+                        <h4>2. Generate API Token</h4>
+                        <ol>
+                            <li>Go to My Profile → API Tokens</li>
+                            <li>Create Token → Use "Edit Cloudflare Workers" template</li>
+                            <li>Add R2 permissions: Read and Write</li>
+                            <li>Copy the token</li>
+                        </ol>
+
+                        <h4>3. Enable Public Access (Optional)</h4>
+                        <ol>
+                            <li>In your R2 bucket settings</li>
+                            <li>Enable "Public Access"</li>
+                            <li>Copy the public URL</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-script.js"></script>
+</body>
+</html>

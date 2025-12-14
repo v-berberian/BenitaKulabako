@@ -1,0 +1,20 @@
+# Cloudflare Workers Configuration
+# This file configures the Cloudflare Worker for R2 uploads
+
+name = "portfolio-upload-api"
+main = "cloudflare-worker.js"
+compatibility_date = "2024-01-01"
+
+# R2 Bucket Binding
+[[r2_buckets]]
+binding = "PORTFOLIO_BUCKET"
+bucket_name = "portfolio-media"  # Change this to your bucket name
+
+# Environment Variables
+[vars]
+PUBLIC_URL = "https://pub-xxxxx.r2.dev"  # Replace with your R2 public URL
+
+# Uncomment for custom domains
+# routes = [
+#   { pattern = "api.yourdomain.com/*", zone_name = "yourdomain.com" }
+# ]

@@ -484,6 +484,15 @@ body {
     margin-top: var(--spacing-md);
 }
 
+.hero .contact-wrapper {
+    position: absolute;
+    left: 50%;
+    bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom, 0px));
+    transform: translateX(-50%);
+    margin-top: 0;
+    z-index: 2;
+}
+
 .contact-link {
     display: inline-block;
     font-size: 0.95rem;
@@ -721,6 +730,10 @@ body {
 
     .contact-wrapper {
         margin-top: var(--spacing-sm);
+    }
+
+    .hero .contact-wrapper {
+        bottom: calc(var(--spacing-sm) + env(safe-area-inset-bottom, 0px));
     }
 
     .contact-link {

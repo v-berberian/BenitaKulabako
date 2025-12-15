@@ -25,6 +25,7 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    scroll-snap-type: y mandatory;
 }
 
 body {
@@ -62,8 +63,9 @@ body {
     position: relative;
     padding: var(--spacing-md) 0;
     overflow: hidden;
-    transition: opacity 0.3s ease-out, transform 0.1s ease-out;
     transform-origin: center top;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 .hero-title {
@@ -98,7 +100,7 @@ body {
 
 .scroll-indicator {
     position: absolute;
-    bottom: var(--spacing-md);
+    bottom: calc(var(--spacing-sm) + env(safe-area-inset-bottom, 0px));
     left: 50%;
     transform: translate(-50%, 40px);
     text-align: center;
@@ -138,12 +140,23 @@ body {
 }
 
 @keyframes bounce {
-    0%, 100% {
+
+    0%,
+    100% {
         transform: translateY(0);
     }
+
     50% {
         transform: translateY(10px);
     }
+}
+
+.scroll-indicator.hidden {
+    display: none;
+    opacity: 0 !important;
+    pointer-events: none;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
 }
 
 /* ================================
@@ -454,7 +467,7 @@ body {
     opacity: 0;
     transform: translateY(60px);
     transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 [data-scroll].visible {
@@ -510,18 +523,33 @@ body {
 }
 
 .portfolio-selection {
-    padding: var(--spacing-md) 0 var(--spacing-lg);
-    min-height: auto;
+    padding: 0;
+    min-height: 100vh;
+    min-height: 100svh;
     display: flex;
-    align-items: center;
+    align-items: stretch;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+}
+
+.portfolio-selection .container {
+    max-width: none;
+    padding: 0;
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    align-items: stretch;
 }
 
 .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
+    grid-template-rows: 1fr;
+    gap: 0;
+    max-width: none;
+    margin: 0;
+    height: 100%;
+    width: 100%;
 }
 
 .portfolio-card {
@@ -534,10 +562,15 @@ body {
     color: var(--color-text);
     transition: var(--transition);
     overflow: hidden;
-    min-height: 200px;
+    min-height: 0;
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+.portfolio-card+.portfolio-card {
+    border-left: 0;
 }
 
 .portfolio-card::before {
@@ -566,17 +599,21 @@ body {
 }
 
 .portfolio-card-title {
-    font-size: clamp(1.75rem, 3vw, 2.5rem);
-    font-weight: 700;
+    font-size: clamp(2.5rem, 6vw, 8rem);
+    font-weight: 900;
     margin-bottom: 0.5rem;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.04em;
+    line-height: 0.9;
+    text-transform: uppercase;
 }
 
 .portfolio-card-description {
-    font-size: 1rem;
-    font-weight: 300;
+    font-size: clamp(1rem, 1.5vw, 1.25rem);
+    font-weight: 400;
     opacity: 0.7;
-    margin-bottom: 1rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
 }
 
 .portfolio-card-arrow {
@@ -656,7 +693,8 @@ body {
     }
 
     .hero {
-        min-height: 90vh;
+        min-height: 100vh;
+        min-height: 100svh;
     }
 
     .hero-minimal {
@@ -664,26 +702,14 @@ body {
         padding: var(--spacing-lg) 0 var(--spacing-sm);
     }
 
-    .hero-minimal .hero-title {
-        margin-bottom: var(--spacing-xs);
-    }
-
-    .hero-minimal .intro-text {
-        font-size: 1rem;
-        margin-bottom: 0.5rem;
-    }
-
-    .portfolio-selection {
-        padding: var(--spacing-sm) 0 var(--spacing-md);
-    }
-
     .portfolio-grid {
         grid-template-columns: 1fr;
-        gap: 1rem;
+        grid-template-rows: repeat(2, 1fr);
+        gap: 0;
     }
 
     .portfolio-card {
-        min-height: 160px;
+        min-height: 0;
         padding: var(--spacing-sm) var(--spacing-xs);
     }
 
@@ -720,7 +746,7 @@ body {
     }
 
     .scroll-indicator {
-        bottom: var(--spacing-sm);
+        bottom: calc(var(--spacing-xs) + env(safe-area-inset-bottom, 0px));
     }
 }
 
@@ -743,6 +769,7 @@ body {
    ================================ */
 
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {

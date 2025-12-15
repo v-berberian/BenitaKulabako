@@ -103,7 +103,7 @@ let ticking = false;
 let hasScrolledOnce = false;
 
 function updateParallax() {
-    const scrolled = window.pageYOffset;
+    const scrolled = Math.max(0, window.pageYOffset || 0);
 
     // Mark that user has started scrolling
     if (scrolled > 0) {
@@ -138,10 +138,6 @@ function updateParallax() {
                 const indicatorSpeed = 1.2;
                 const indicatorPos = -(scrolled * indicatorSpeed);
                 scrollIndicator.style.transform = `translate(-50%, ${indicatorPos}px)`;
-
-                // Fade out scroll indicator faster
-                const opacity = Math.max(0, 1 - (scrolled / 200));
-                scrollIndicator.style.opacity = opacity;
             }
 
             // More pronounced zoom effect
@@ -154,6 +150,21 @@ function updateParallax() {
         }
     }
 
+    // Always check scroll indicator visibility
+    // We do this outside the hero check to ensure it hides even if we scroll past quickly
+    const scrollIndicator = document.querySelector('.scroll-indicator');
+    if (scrollIndicator) {
+        // Hide as soon as the user scrolls at all
+        if (scrolled > 0) {
+            scrollIndicator.classList.add('hidden');
+            // Remove inline opacity that might have been set previously or by other scripts
+            scrollIndicator.style.opacity = '';
+            scrollIndicator.style.visibility = '';
+        } else {
+            scrollIndicator.classList.remove('hidden');
+        }
+    }
+
     ticking = false;
 }
 
@@ -162,6 +173,15 @@ window.addEventListener('scroll', () => {
         window.requestAnimationFrame(updateParallax);
         ticking = true;
     }
+});
+
+// Hide the scroll indicator immediately on user scroll intent
+['wheel', 'touchmove', 'keydown'].forEach((eventName) => {
+    window.addEventListener(eventName, () => {
+        const scrollIndicator = document.querySelector('.scroll-indicator');
+        if (!scrollIndicator) return;
+        if ((window.pageYOffset || 0) > 0) scrollIndicator.classList.add('hidden');
+    }, { passive: true });
 });
 
 // ================================
@@ -261,6 +281,9 @@ window.addEventListener('load', () => {
             el.classList.add('visible');
         }, index * 200);
     });
+
+    // Initial parallax check to set correct state
+    updateParallax();
 });
 
 // ================================

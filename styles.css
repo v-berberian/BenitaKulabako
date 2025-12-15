@@ -13,7 +13,7 @@
     --color-text: #0a0a0a;
     --color-text-light: #6b6b6b;
     --color-accent: #0a0a0a;
-    --color-border: #e5e5e5;
+    --color-border: #000000;
     --spacing-xs: 1rem;
     --spacing-sm: 2rem;
     --spacing-md: 4rem;
@@ -485,21 +485,21 @@ body {
 }
 
 .hero .contact-wrapper {
-    position: absolute;
-    left: 50%;
-    bottom: calc(var(--spacing-md) + env(safe-area-inset-bottom, 0px));
-    transform: translateX(-50%);
-    margin-top: 0;
+    position: relative;
+    margin-top: 10vh;
     z-index: 2;
+    transform: none;
+    left: auto;
+    bottom: auto;
 }
 
 .contact-link {
     display: inline-block;
-    font-size: 0.95rem;
+    font-size: 1.25rem;
     font-weight: 500;
     color: var(--color-text);
     text-decoration: none;
-    padding: 0.75rem 1.5rem;
+    padding: 1rem 2.5rem;
     border: 1px solid var(--color-border);
     background: var(--color-bg);
     transition: var(--transition);
@@ -732,13 +732,9 @@ body {
         margin-top: var(--spacing-sm);
     }
 
-    .hero .contact-wrapper {
-        bottom: calc(var(--spacing-sm) + env(safe-area-inset-bottom, 0px));
-    }
-
     .contact-link {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.875rem;
+        padding: 0.8rem 1.8rem;
+        font-size: 1.1rem;
     }
 
     .page-header .container {

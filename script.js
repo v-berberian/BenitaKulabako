@@ -137,7 +137,7 @@ function updateParallax() {
             if (scrollIndicator) {
                 const indicatorSpeed = 1.2;
                 const indicatorPos = -(scrolled * indicatorSpeed);
-                scrollIndicator.style.transform = `translate(-50%, ${indicatorPos}px)`;
+                scrollIndicator.style.transform = `translateY(${indicatorPos}px)`;
             }
 
             // More pronounced zoom effect

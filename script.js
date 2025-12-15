@@ -134,10 +134,10 @@ function updateParallax() {
 
             // Scroll indicator - fastest movement (floats up much faster)
             const scrollIndicator = document.querySelector('.scroll-indicator');
-            if (scrollIndicator) {
+            if (scrollIndicator && scrolled > 0) {
                 const indicatorSpeed = 1.2;
                 const indicatorPos = -(scrolled * indicatorSpeed);
-                scrollIndicator.style.transform = `translate(-50%, ${indicatorPos}px)`;
+                scrollIndicator.style.transform = `translateY(${indicatorPos}px)`;
             }
 
             // More pronounced zoom effect
@@ -162,6 +162,8 @@ function updateParallax() {
             scrollIndicator.style.visibility = '';
         } else {
             scrollIndicator.classList.remove('hidden');
+            // Clear transform so CSS animation can run
+            scrollIndicator.style.transform = '';
         }
     }
 
@@ -284,6 +286,34 @@ window.addEventListener('load', () => {
 
     // Initial parallax check to set correct state
     updateParallax();
+
+    // Word-by-word reveal animation for hero intro
+    const heroIntroText = document.querySelectorAll('.intro-text');
+    if (heroIntroText.length > 0) {
+        // Start after hero title animation (approx 0.2s delay + 1s duration = 1.2s total, but we want overlap)
+        let baseDelay = 800; 
+
+        heroIntroText.forEach(paragraph => {
+            const text = paragraph.textContent.trim();
+            const words = text.split(' ');
+            
+            paragraph.textContent = ''; // Clear original text
+            
+            words.forEach((word, index) => {
+                const span = document.createElement('span');
+                span.textContent = word + ' ';
+                span.className = 'word-reveal';
+                // Stagger each word by 50ms
+                span.style.animationDelay = `${baseDelay}ms`;
+                paragraph.appendChild(span);
+                
+                baseDelay += 50;
+            });
+            
+            // Add a bigger pause between paragraphs
+            baseDelay += 300; 
+        });
+    }
 });
 
 // ================================

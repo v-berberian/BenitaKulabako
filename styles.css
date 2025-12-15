@@ -13,7 +13,7 @@
     --color-text: #0a0a0a;
     --color-text-light: #6b6b6b;
     --color-accent: #0a0a0a;
-    --color-border: #000000;
+    --color-border: #b3b3b3;
     --spacing-xs: 1rem;
     --spacing-sm: 2rem;
     --spacing-md: 4rem;
@@ -76,18 +76,41 @@ body {
     margin-bottom: var(--spacing-md);
     text-transform: uppercase;
     opacity: 0;
-    transform: translateY(40px);
-    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
-    will-change: transform;
+    animation: fadeIn 2.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s forwards;
+    will-change: opacity;
 }
 
 .hero-intro {
     max-width: 800px;
     margin-bottom: var(--spacing-lg);
+}
+
+.word-reveal {
+    display: inline-block;
     opacity: 0;
-    transform: translateY(40px);
-    animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s forwards;
-    will-change: transform;
+    white-space: pre-wrap;
+    animation: fadeWord 2s ease-out forwards;
+    will-change: opacity;
+}
+
+@keyframes fadeWord {
+    0% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .intro-text {
@@ -101,11 +124,12 @@ body {
 .scroll-indicator {
     position: absolute;
     bottom: calc(var(--spacing-sm) + env(safe-area-inset-bottom, 0px));
-    left: 50%;
-    transform: translate(-50%, 40px);
+    left: 0;
+    width: 100%;
+    transform: translateY(150px);
     text-align: center;
     opacity: 0;
-    animation: fadeInUpCenter 1s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards;
     will-change: transform, opacity;
     transition: opacity 0.3s ease-out;
 }
@@ -491,6 +515,9 @@ body {
     transform: none;
     left: auto;
     bottom: auto;
+    opacity: 0;
+    animation: fadeIn 4.5s cubic-bezier(0.16, 1, 0.3, 1) 1s forwards;
+    will-change: opacity;
 }
 
 .contact-link {
@@ -504,6 +531,7 @@ body {
     background: var(--color-bg);
     transition: var(--transition);
     letter-spacing: 0.02em;
+    border-radius: 9999px;
 }
 
 .contact-link:hover {
@@ -568,6 +596,7 @@ body {
     padding: var(--spacing-md) var(--spacing-sm);
     background: var(--color-bg);
     border: 1px solid var(--color-border);
+    border-radius: 24px;
     text-decoration: none;
     color: var(--color-text);
     transition: var(--transition);
@@ -722,6 +751,8 @@ body {
     .portfolio-card {
         min-height: 0;
         padding: var(--spacing-sm) var(--spacing-xs);
+        border-radius: 0;
+        border-bottom: 1px solid var(--color-border);
     }
 
     .portfolio-card-title {

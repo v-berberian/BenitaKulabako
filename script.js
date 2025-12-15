@@ -117,19 +117,16 @@ function updateParallax() {
 
         if (scrolled < heroHeight) {
             // Title - slowest movement (more dramatic)
+            // Title - slowest movement (more dramatic)
             const heroTitle = document.querySelector('.hero-title');
             if (heroTitle) {
-                const titleSpeed = 0.8;
-                const titlePos = -(scrolled * titleSpeed);
-                heroTitle.style.transform = `translateY(${titlePos}px)`;
+               // Internal parallax removed for layered effect
             }
 
             // Intro - medium speed (more dramatic)
             const heroIntro = document.querySelector('.hero-intro');
             if (heroIntro) {
-                const introSpeed = 0.5;
-                const introPos = -(scrolled * introSpeed);
-                heroIntro.style.transform = `translateY(${introPos}px)`;
+               // Internal parallax removed for layered effect
             }
 
             // Scroll indicator - fastest movement (floats up much faster)
@@ -140,13 +137,7 @@ function updateParallax() {
                 scrollIndicator.style.transform = `translateY(${indicatorPos}px)`;
             }
 
-            // More pronounced zoom effect
-            const scale = 1 + (scrolled / heroHeight) * 0.2; // Zoom from 1 to 1.2
-            heroSection.style.transform = `scale(${scale})`;
-
-            // More noticeable opacity fade
-            const heroOpacity = Math.max(0.2, 1 - (scrolled / heroHeight) * 0.8);
-            heroSection.style.opacity = heroOpacity;
+            // Zoom effect removed
         }
     }
 

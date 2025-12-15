@@ -66,6 +66,18 @@ body {
     transform-origin: center top;
     scroll-snap-align: start;
     scroll-snap-stop: always;
+    z-index: 2;
+    background-color: var(--color-bg);
+    width: 100%;
+    border-bottom: 1px solid #000;
+}
+
+.parallax-spacer {
+    height: 100vh;
+    height: 100svh;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    pointer-events: none;
 }
 
 .hero-title {
@@ -566,8 +578,12 @@ body {
     min-height: 100svh;
     display: flex;
     align-items: stretch;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1;
+    pointer-events: auto;
 }
 
 .portfolio-selection .container {

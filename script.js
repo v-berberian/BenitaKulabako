@@ -178,6 +178,45 @@ window.addEventListener('scroll', () => {
 });
 
 // ================================
+// MOUSE WHEEL AUTOSCROLL HELPER
+// ================================
+
+let isAutoScrolling = false;
+window.addEventListener('wheel', (e) => {
+    // Only apply on landing page
+    if (!document.querySelector('.hero-minimal') || !document.querySelector('.portfolio-selection')) return;
+    
+    // Don't interrupt if we're already animating or scrolling
+    if (isAutoScrolling) return;
+
+    const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+    const vh = window.innerHeight;
+    const threshold = vh * 0.25; // 25% threshold as requested
+
+    if (e.deltaY > 0 && scrolled < threshold) {
+        // User scrolls down while at the top
+        isAutoScrolling = true;
+        e.preventDefault();
+        window.scrollTo({
+            top: vh,
+            behavior: 'smooth'
+        });
+        // Reset lock after animation finishes
+        setTimeout(() => { isAutoScrolling = false; }, 1000);
+    } else if (e.deltaY < 0 && scrolled > (vh - threshold) && scrolled < (vh + threshold)) {
+        // User scrolls up while at the portfolio section
+        isAutoScrolling = true;
+        e.preventDefault();
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+        // Reset lock after animation finishes
+        setTimeout(() => { isAutoScrolling = false; }, 1000);
+    }
+}, { passive: false });
+
+// ================================
 // LAZY LOADING IMAGES (IF ADDED)
 // ================================
 

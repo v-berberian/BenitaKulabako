@@ -131,11 +131,11 @@ function updateParallax() {
 
             // Scroll indicator - fastest movement (floats up much faster)
             const scrollIndicator = document.querySelector('.scroll-indicator');
-            if (scrollIndicator && scrolled > 0) {
-                const indicatorSpeed = 1.2;
-                const indicatorPos = -(scrolled * indicatorSpeed);
-                scrollIndicator.style.transform = `translateY(${indicatorPos}px)`;
-            }
+        if (scrollIndicator && scrolled > 0) {
+            const indicatorSpeed = 1.2;
+            const indicatorPos = -(scrolled * indicatorSpeed);
+            scrollIndicator.style.transform = `translateY(${indicatorPos}px)`;
+        }
 
             // Zoom effect removed
         }

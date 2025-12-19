@@ -134,6 +134,16 @@ body {
     pointer-events: none;
 }
 
+.hero.soften .hero-media {
+    filter: blur(2px) saturate(0.8) contrast(0.95) brightness(0.95);
+}
+
+.hero.soften .hero-overlay {
+    opacity: 0.94;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
 .parallax-spacer {
     height: 100vh;
     height: 100svh;
@@ -1029,7 +1039,7 @@ body {
     inset: 0;
     background-size: cover;
     background-position: 50% 40%;
-    filter: saturate(1.08) contrast(1.02);
+    filter: saturate(1.02) contrast(1);
     transform: none;
     transition: filter 0.9s ease;
     z-index: 0;
@@ -1042,7 +1052,7 @@ body {
     inset: 0;
     pointer-events: none;
     background-blend-mode: soft-light;
-    opacity: 0.35;
+    opacity: 0.42;
     transition: opacity 0.9s ease;
     z-index: 1;
 }
@@ -1073,7 +1083,7 @@ body {
 }
 
 .portfolio-card[data-portfolio="content"] .portfolio-card-media::after {
-    background: linear-gradient(180deg, rgba(196, 170, 138, 0.55) 0%, rgba(103, 141, 137, 0.55) 45%, rgba(46, 68, 68, 0.65) 100%);
+    background: linear-gradient(180deg, rgba(230, 173, 135, 0.5) 0%, rgba(204, 138, 112, 0.5) 45%, rgba(158, 106, 82, 0.58) 100%);
 }
 
 .portfolio-card[data-portfolio="acting"] .portfolio-card-media {
@@ -1082,7 +1092,7 @@ body {
 }
 
 .portfolio-card[data-portfolio="acting"] .portfolio-card-media::after {
-    background: linear-gradient(180deg, rgba(196, 170, 138, 0.55) 0%, rgba(103, 141, 137, 0.55) 45%, rgba(46, 68, 68, 0.65) 100%);
+    background: linear-gradient(180deg, rgba(126, 183, 182, 0.5) 0%, rgba(94, 146, 150, 0.5) 45%, rgba(58, 92, 98, 0.58) 100%);
 }
 
 .portfolio-card.thumb-card .portfolio-card-content {

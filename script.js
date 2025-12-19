@@ -139,6 +139,10 @@ function updateParallax() {
 
             // Zoom effect removed
         }
+
+        // Soft blur the hero as we transition toward the cards
+        const softenHero = scrolled > heroHeight * 0.18;
+        heroSection.classList.toggle('soften', softenHero);
     }
 
     // Always check scroll indicator visibility

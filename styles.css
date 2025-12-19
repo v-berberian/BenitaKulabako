@@ -160,15 +160,18 @@ body {
 
 .scroll-indicator {
     position: absolute;
-    bottom: calc(var(--spacing-sm) + env(safe-area-inset-bottom, 0px));
+    bottom: 0;
     left: 0;
+    right: 0;
     width: 100%;
-    transform: translateY(150px);
+    transform: translateY(100%);
     text-align: center;
     opacity: 0;
-    animation: fadeInUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards;
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 2.5s forwards;
     will-change: transform, opacity;
     transition: opacity 0.3s ease-out;
+    padding-bottom: calc(1rem + env(safe-area-inset-bottom, 0px));
+    z-index: 2;
 }
 
 .scroll-indicator span {

@@ -33,6 +33,7 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    overscroll-behavior-y: none;
 }
 
 @media (min-width: 769px) {
@@ -49,6 +50,7 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overscroll-behavior-y: none;
 }
 
 
@@ -87,6 +89,20 @@ body {
     box-shadow: 0 30px 90px rgba(0, 0, 0, 0.16);
     isolation: isolate;
     color: var(--hero-text);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -40px;
+    height: 160px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.35) 0%, rgba(0, 0, 0, 0.12) 45%, rgba(0, 0, 0, 0) 100%);
+    filter: blur(26px);
+    opacity: 0.9;
+    z-index: 3;
+    pointer-events: none;
 }
 
 .hero-media {
@@ -925,6 +941,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
 }
 
 .portfolio-card+.portfolio-card {
@@ -997,7 +1014,7 @@ body {
 }
 
 .portfolio-card.thumb-card::before {
-    background: linear-gradient(180deg, rgba(5, 5, 5, 0.1) 0%, rgba(5, 5, 5, 0.25) 35%, rgba(5, 5, 5, 0.65) 100%);
+    background: linear-gradient(180deg, rgba(5, 5, 5, 0.06) 0%, rgba(5, 5, 5, 0.16) 35%, rgba(5, 5, 5, 0.4) 100%);
     transform: translateY(0);
     opacity: 1;
     mix-blend-mode: multiply;
@@ -1012,7 +1029,7 @@ body {
     inset: 0;
     background-size: cover;
     background-position: 50% 40%;
-    filter: grayscale(1) saturate(0.88) contrast(1.05);
+    filter: saturate(1.08) contrast(1.02);
     transform: none;
     transition: filter 0.9s ease;
     z-index: 0;
@@ -1025,7 +1042,7 @@ body {
     inset: 0;
     pointer-events: none;
     background-blend-mode: soft-light;
-    opacity: 0.65;
+    opacity: 0.35;
     transition: opacity 0.9s ease;
     z-index: 1;
 }
@@ -1043,7 +1060,7 @@ body {
 }
 
 .portfolio-card.thumb-card:hover .portfolio-card-media {
-    filter: grayscale(0) saturate(1.02) contrast(1.03);
+    filter: saturate(1.12) contrast(1.05);
 }
 
 .portfolio-card.thumb-card:hover .portfolio-card-media::after,

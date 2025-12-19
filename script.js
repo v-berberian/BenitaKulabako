@@ -185,11 +185,18 @@ let isAutoScrolling = false;
 window.addEventListener('wheel', (e) => {
     // Only apply on landing page
     if (!document.querySelector('.hero-minimal') || !document.querySelector('.portfolio-selection')) return;
+
+    const scrolled = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Prevent overscroll bounce pulling the hero down when already at the top
+    if (scrolled <= 0 && e.deltaY < 0) {
+        e.preventDefault();
+        return;
+    }
     
     // Don't interrupt if we're already animating or scrolling
     if (isAutoScrolling) return;
 
-    const scrolled = window.pageYOffset || document.documentElement.scrollTop;
     const vh = window.innerHeight;
     const threshold = vh * 0.25; // 25% threshold as requested
 

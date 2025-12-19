@@ -720,6 +720,8 @@ body {
     width: 100%;
     z-index: 1;
     pointer-events: auto;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.82) 0%, rgba(245, 240, 232, 0.9) 40%, rgba(242, 235, 225, 0.95) 100%);
+    overflow: hidden;
 }
 
 .portfolio-selection .container {
@@ -730,6 +732,21 @@ body {
     display: flex;
     align-items: stretch;
     position: relative;
+    z-index: 1;
+}
+
+.portfolio-selection::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(120% 120% at 30% 20%, rgba(0, 0, 0, 0.025), transparent 50%),
+        radial-gradient(140% 140% at 80% 0%, rgba(0, 0, 0, 0.02), transparent 60%),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.12'/%3E%3C/svg%3E");
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+    mix-blend-mode: multiply;
 }
 
 .glass-header {
